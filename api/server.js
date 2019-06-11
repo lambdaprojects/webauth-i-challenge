@@ -10,7 +10,7 @@ const sessionConfig = {
   secret: "Fruits are healthy!",
   cookie: {
     httpOnly: true, // prevent access from Javascript
-    maxAge: 1000 * 45,
+    maxAge: 1000 * 60 * 1,
     secure: false // true means send it only over https
   },
   resave: false,
@@ -18,7 +18,8 @@ const sessionConfig = {
 };
 server.use(session(sessionConfig));
 server.get("/", (req, res) => {
-  res.send(`<h3>You have reached the default page of API Server</h3>`);
+  const user = req.session.user || "Stranger";
+  res.send(`Hello ${user.username}!`);
 });
 
 server.use("/api/auth", authRouter);
