@@ -21,6 +21,6 @@ server.get("/", (req, res) => {
   res.send(`<h3>You have reached the default page of API Server</h3>`);
 });
 
-server.use("/api", authRouter);
+server.use("/api/auth", authRouter);
 server.use("/api/restricted", userRouter);
 module.exports = server;

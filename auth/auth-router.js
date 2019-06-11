@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const UserHelper = require("../users/user-model.js");
 
 router.post("/register", async (req, res) => {
+  console.log("------WITHIN REGISTER --------");
   try {
     let user = req.body;
     const hash = bcrypt.hashSync(user.password, 8);
@@ -23,8 +24,10 @@ router.post("/login", (req, res) => {
     .first()
     .then(user => {
       if (user && bcrypt.compareSync(password, user.password)) {
-        req.session.user = user;
-        res.status(200).json({ message: `Welcome ${user.username}!` });
+        req.session.username = user.username;
+        res
+          .status(200)
+          .json({ message: `Welcome ${user.username}! Have a cookie.` });
       } else {
         res.status(401).json({ message: "Invalid Credentials" });
       }
