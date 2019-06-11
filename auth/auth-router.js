@@ -36,4 +36,20 @@ router.post("/login", (req, res) => {
       res.status(500).json(error);
     });
 });
+
+router.get("/logout", (req, res) => {
+  if (req.session) {
+    req.session.destroy(err => {
+      if (err) {
+        res.json({
+          message: "you can checkout anytime, but can never leave!!"
+        });
+      } else {
+        res.status(200).json({ message: "bye, thanks for playing" });
+      }
+    });
+  } else {
+    res.status(200).json({ message: "you were never here to begin with!" });
+  }
+});
 module.exports = router;
