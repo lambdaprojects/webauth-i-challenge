@@ -5,7 +5,7 @@ const restricted = require("../auth/restricted.js");
 
 const router = express.Router();
 
-router.get("/", restricted, (req, res) => {
+router.get("/users", restricted, (req, res) => {
   Users.find()
     .then(users => {
       res.json(users);
